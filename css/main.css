@@ -8,7 +8,6 @@ body {
 }
 
 a { 
-color: #ff66cc;
 text-decoration: none; 
 }
 
@@ -22,13 +21,14 @@ margin:0px
 }
 
 h2 {
-font-size:12px;
+font-size:14px;
 padding-top:10px;
 color: #315B7E;
 background-color: transparent;
+margin
 }
 
-p, h2, pre {
+p, pre {
 margin: 0; 
 }
 
