@@ -17,12 +17,34 @@
     <script type="text/javascript" src="syntaxHighlight/scripts/shBrushJScript.js"></script>
     <link type="text/css" rel="stylesheet" href="syntaxHighlight/styles/shCoreDefault.css"/>
     
-    <script src="js/lib/nvd3/nv.d3.js"></script>
-    <link href="js/lib/nvd3/src/nv.d3.css" rel="stylesheet">
+    <script src="js/lib/dex/dex.min.js"></script>
+    <script src="js/lib/dex/BarChart.js"></script>
+    <script src="js/lib/dex/json.js"></script>
 
-    <script type="text/javascript">
-      SyntaxHighlighter.all();
-    </script>
+    <style type="text/css">
+      .xaxis path,
+      .xaxis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+      }
+
+      .xaxis path {
+        /*display: none;*/
+      }
+
+      .yaxis path,
+      .yaxis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+      }
+
+      .yaxis path {
+        /*display: none;*/
+      }
+    </style>  
+
   </head> 
 
   <body>
@@ -30,20 +52,61 @@
     <div id="left"></div>
     <div id="right"></div>
     <div id="content">
-      <h2>NVD3 : Reusable charts</h2>
-       <p>Examples, live code ability, source available at <a href="http://nvd3.org/">http://nvd3.org/</a></p>
-      <div id="chart"><svg></svg></div>
+      <h2>DexCharts : Reusable charts</h2>
+       <p>Examples, source available at <a href="https://github.com/PatMartin/DexCharts">https://github.com/PatMartin/DexCharts</a></p>
+        <p>The author has a lot of blog posts about the library at <a href="http://dexvis.wordpress.com/">http://dexvis.wordpress.com/</a></p>
+      <div id="chart"><svg height="200" width="600"></svg></div>
       <pre class="brush: js;">
+var svg = d3.select('#chart svg').append("g")
+  .attr("transform", "translate(40,20)");
 
-    </pre>
+d3.json('data/keyvalue.json', function (e, d) {
+  var chart = new BarChart(
+    {
+      'parent' : svg,
+      'height' : 150,
+      'width'  : 550,
+      'csv'   : dex.json.toCsv(d),
+      'ymin' : 0
+    }
+  );
+
+  chart.render();
+});
+      </pre>
     <div>
       <h2>What I Learned</h2>
       <ul>
-        <li>Rsfsf</li>
+        <li>The closest thing to documentation is the source. This makes it very frustrating to use.</li>
+        <li>Requires data to be in CSV, although utility functions are available </li>
+        <li>Has default meaningless data when no data is filled in, which is very annoying for debugging. I'd rather see nothing than meaningless data.</li>
+        <li>Has console.log stuff in the minified script, which also makes it annoying for debugging.</li>
+        <li>His examples in the readme point to blog posts that are no longer completely accurate with API changes. Specifically, the classes of the elements have changed slightly.</li>
+        <li>I was unable to get the labels to work, the scenario I've got is matching examples but mine doesn't work :(</li>
       </ul>
 
-      <h2>Snap Judgements:sdfsf</h2>
+      <h2>Snap Judgements: The author's blog shows that he is making it very powerful, but it needs documentation. It doesn't seem like it should be used for production, but it does show a lot of promise.</h2>
     </div>
     </div>
+    <script type="text/javascript">
+      SyntaxHighlighter.all();
+
+      var svg = d3.select('#chart svg').append("g")
+        .attr("transform", "translate(40,20)");
+
+      d3.json('data/keyvalue.json', function (e, d) {
+        var chart = new BarChart(
+          {
+            'parent' : svg,
+            'height' : 150,
+            'width'  : 550,
+            'csv'   : dex.json.toCsv(d),
+            'ymin' : 0
+          }
+        );
+
+        chart.render();
+      });
+    </script>
   </body>
 </html>

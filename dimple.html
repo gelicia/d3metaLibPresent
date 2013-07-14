@@ -17,12 +17,7 @@
     <script type="text/javascript" src="syntaxHighlight/scripts/shBrushJScript.js"></script>
     <link type="text/css" rel="stylesheet" href="syntaxHighlight/styles/shCoreDefault.css"/>
     
-    <script src="js/lib/nvd3/nv.d3.js"></script>
-    <link href="js/lib/nvd3/src/nv.d3.css" rel="stylesheet">
-
-    <script type="text/javascript">
-      SyntaxHighlighter.all();
-    </script>
+    <script src="js/lib/dimple.v1.min.js"></script>
   </head> 
 
   <body>
@@ -30,20 +25,43 @@
     <div id="left"></div>
     <div id="right"></div>
     <div id="content">
-      <h2>NVD3 : Reusable charts</h2>
-       <p>Examples, live code ability, source available at <a href="http://nvd3.org/">http://nvd3.org/</a></p>
-      <div id="chart"><svg></svg></div>
+      <h2>Dimple.js : Object Oriented API </h2>
+       <p>Examples, documentation, source available at <a href="http://dimplejs.org/">http://dimplejs.org/</a></p>
+       <p>Premade chart types are area, bar, bubble and line. (<a href="https://github.com/PMSI-AlignAlytics/dimple/tree/master/src/objects/plot">Source</a>)</p>
+      <div id="chart"></div>
       <pre class="brush: js;">
+d3.json('data/keyvalue.json', function (e, d) {
+  var svg = dimple.newSvg("#chart", 600, 180);
 
-    </pre>
+  var chart = new dimple.chart(svg, d);
+  chart.addCategoryAxis("x", "key");
+  chart.addMeasureAxis("y", "value");
+  chart.addSeries(null, dimple.plot.bar);
+  chart.draw();
+});
+      </pre>
     <div>
       <h2>What I Learned</h2>
       <ul>
-        <li>Rsfsf</li>
+        <li>Supports only flat json as data.</li>
+        <li>Very simple to set up.</li>
+        <li>CSS is baked in (no external CSS file), but you can add the noFormat modifier to add your own styling.</li>
       </ul>
 
-      <h2>Snap Judgements:sdfsf</h2>
+      <h2>Snap Judgements: Worked really well. The first library with CSS done this way. Flat json may be an issue, but I like it better than CSS and you can define the names at least.</h2>
     </div>
     </div>
+    <script type="text/javascript">
+      SyntaxHighlighter.all();
+
+      d3.json('data/keyvalue.json', function (e, d) {
+        var svg = dimple.newSvg("#chart", 600, 180);
+        var chart = new dimple.chart(svg, d);
+        chart.addCategoryAxis("x", "key");
+        chart.addMeasureAxis("y", "value");
+        chart.addSeries(null, dimple.plot.bar);
+        chart.draw();
+      });
+    </script>
   </body>
 </html>

@@ -28,7 +28,7 @@
     <div id="content">
       <h2>xCharts</h2>
        <p>Examples, documentation and source available at <a href="http://tenxer.github.io/xcharts/">http://tenxer.github.io/xcharts/</a></p>
-      <div id="chart" style="width: 600px; height: 150px;"></div>
+      <div id="chart" style="padding-top:10px; width: 600px; height: 150px;"></div>
       <pre class="brush: js;">
 d3.json('data/keyvalue.json', function(error, dataIn) {        
   var data = dataIn.map(function(d){ 
@@ -50,13 +50,13 @@ d3.json('data/keyvalue.json', function(error, dataIn) {
       ]
   };
 
-  var myChart = new xChart('bar', chartDef, '#chart');
+  var myChart = new xChart('bar', chartDef, '#chart', {axisPaddingTop: 5}); 
 });
     </pre>
     <div>
       <h2>What I Learned</h2>
       <ul>
-        <li>You don't need a figure tag, a div works fine. It seems nitpicky to require an initial width and height, but whatever.</li>
+        <li>You don't need a figure tag, a div works fine. It seems nitpicky to require an initial width and height rather than just have one "it shows up but will look weird" default.</li>
         <li>Custom data is weird - needs data in x, y format. 
           <ul>
             <li>There are options that seem like they would let you make it work for other structures (dataFormatX, tickFormatX), but I wasn't able to get it to see the non x/y data locations. (I didn't include my attempts in the text above, view source on this to see my commented out attempts to get it to work)</li>
@@ -64,9 +64,10 @@ d3.json('data/keyvalue.json', function(error, dataIn) {
             <li>You can map the data to make it work.</li>
           </ul>
         </li>
+        <li>You can toggle between line charts and bar charts very easily, which is neat.</li>
       </ul>
 
-      <h2>Snap Judgements: Kind a mashup of NVD3 and Vega. Use pre-developed charts and build them in json, although the chart type definition outside of the chart itself makes it seem like it's not supposed to be generated. I don't like not being able to get the data easily.</h2>
+      <h2>Snap Judgements: Kind of seems like Vega's "define a chart in an object" meets NVD3's predefined chart logic. Not a ton of premade models, but looks extendible. I wish it were more flexible about what data coming in looks like.</h2>
     </div>
     </div>
     <script type="text/javascript">
@@ -89,15 +90,16 @@ d3.json('data/keyvalue.json', function(error, dataIn) {
                 "className": ".fruitClass",
                 "data": data
               }
-            ]
+            ],
           //"dataFormatX" : function(d) { console.log(d); return d.key},
           //"dataFormatY" : function(d) {return d.value}
          // "opts": "{\n  \"dataFormatX\": function(d) { console.log(d); return d.key;},\n  \"dataFormatY\": function(d) { return d.value;}\n}"
+         "paddingTop" : '100'
         };
 
         //var opts = {dataFormatX : function(d){ console.log(d); return d.key;} , dataFormatY : function(d){ return d.value;}}
 
-        var myChart = new xChart('bar', chartDef, '#chart'); //, opts);
+        var myChart = new xChart('bar', chartDef, '#chart', {axisPaddingTop: 5}); 
       });
     </script>
   </body>
