@@ -71,6 +71,8 @@ d3.json('data/keyvalue.json', function (e, d) {
     }
   );
 
+  chart.config.xaxis.tick.format= undefined;
+
   chart.render();
 });
       </pre>
@@ -104,6 +106,8 @@ d3.json('data/keyvalue.json', function (e, d) {
             'ymin' : 0
           }
         );
+
+        chart.config.xaxis.tick.format= undefined;
 
         chart.render();
       });
