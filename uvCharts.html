@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />		
+    <title>D3 Metalibrary Presentation</title> 
+
+  <!-- 
+  CSS and HTML Template by miss monorom http://www.intensivstation.ch
+  This work is licensed under a Creative Commons License http://creativecommons.org/licenses/by/1.0/
+  -->
+    <script type="text/javascript" src="syntaxHighlight/scripts/shCore.js"></script>
+    <script type="text/javascript" src="syntaxHighlight/scripts/shBrushJScript.js"></script>
+    <link type="text/css" rel="stylesheet" href="syntaxHighlight/styles/shCoreDefault.css"/>
+    
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <script src="js/lib/d3.v3.min.js"></script>
+    <script src="js/lib/uvcharts.min.js"></script>
+  </head> 
+
+  <body>
+    <h1><a href="./index.html">D3 Meta Library Presentation</a></h1>
+    <div id="left"></div>
+    <div id="right"></div>
+    <div id="content">
+      <h2>uvCharts</h2>
+       <p>Documentation, source available at <a href="https://github.com/imaginea/uvCharts">https://github.com/imaginea/uvCharts</a></p>
+       <p>12 types of charts available</p>
+      <div id="uv-div"></div>
+      <pre class="brush: js;">
+d3.json('data/keyvalue.json', function (e, dataIn) {
+  var data = dataIn.map(function(d){ 
+    var retObj = {};
+    retObj.name = d.key;
+    retObj.value = d.value;
+    return retObj;
+  });
+
+  var graphdef = {
+    categories : ['uvCharts'],
+    dataset : {
+      'uvCharts' : data
+    }
+  };
+
+  var config = {
+    graph: {
+      orientation: 'Vertical'
+    }
+  };
+
+  var chart = uv.chart('Bar', graphdef, config);
+});
+      </pre>
+    <div>
+      <h2>What I Learned</h2>
+      <ul>
+        <li>Data needs to be in in flat name, value format</li>
+        <li>Nice documentation, but more examples would be helpful</li>
+        <li>Lots of individual config options</li>
+        <li>Categories are more built in than others I've seen.</li>
+      </ul>
+
+      <h2>Snap Judgements: It has a nice wide variety of charts, but I wish there were more examples.</h2>
+    </div>
+    </div>
+    <script type="text/javascript">
+      SyntaxHighlighter.all();
+
+      d3.json('data/keyvalue.json', function (e, dataIn) {
+        var data = dataIn.map(function(d){ 
+          var retObj = {};
+          retObj.name = d.key;
+          retObj.value = d.value;
+          return retObj;
+        });
+
+        var graphdef = {
+          categories : ['uvCharts'],
+          dataset : {
+            'uvCharts' : data
+          }
+        };
+
+        var config = {
+          graph: {
+            orientation: 'Vertical'
+          }
+        };
+
+        var chart = uv.chart('Bar', graphdef, config);
+      });
+    </script>
+  </body>
+</html>
